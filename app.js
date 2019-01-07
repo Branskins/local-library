@@ -9,12 +9,17 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// MongoDB driver options object
+const options = {
+  useNewUrlParser: true
+};
+
 // set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'insert_your_url_here';
-mongoose.connect(mongoDB);
+var mongoDB = 'mongodb+srv://branskins:qURT821NmRiG5ILg@cluster0-vftmf.mongodb.net/local-library?retryWrites=true';
+mongoose.connect(mongoDB, options);
 mongoose.Promise = global.Promise;
-var db = mangoose.connection;
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // view engine setup
