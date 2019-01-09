@@ -16,7 +16,7 @@ const options = {
 
 // set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://branskins:qURT821NmRiG5ILg@cluster0-vftmf.mongodb.net/local-library?retryWrites=true';
+var mongoDB = 'mongodb://branskins:qURT821NmRiG5ILg@cluster0-shard-00-00-vftmf.mongodb.net:27017,cluster0-shard-00-01-vftmf.mongodb.net:27017,cluster0-shard-00-02-vftmf.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
 mongoose.connect(mongoDB, options);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
