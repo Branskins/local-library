@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router;
+var router = express.Router();
 
 // require controller module
 var book_controller = require('../controllers/bookController');
@@ -91,27 +91,27 @@ router.get('/genres', genre_controller.genre_list);
 /// BOOKINSTANCE ROUTES ///
 
 // GET request for creating a BookInstance. NOTE: This must come before routes that display BookInstance (uses id)
-router.get('/genre/create', genre_controller.genre_create_get);
+router.get('/bookinstance/create', bookinstance_controller.bookinstance_create_get);
 
 // POST request for creating BookInstance
-router.post('/genre/create', genre_controller.genre_create_post);
+router.post('/bookinstance/create', bookinstance_controller.bookinstance_create_post);
 
 // GET request to delete BookInstance
-router.get('/genre/:id/delete', genre_controller.genre_delete_get);
+router.get('/bookinstance/:id/delete', bookinstance_controller.bookinstance_delete_get);
 
 // POST request to delete BookInstance
-router.post('/genre/:id/delete', genre_controller.genre_delete_post);
+router.post('/bookinstance/:id/delete', bookinstance_controller.bookinstance_delete_post);
 
 // GET request to update BookInstance
-router.get('/genre/:id/update', genre_controller.genre_update_get);
+router.get('/bookinstance/:id/update', bookinstance_controller.bookinstance_update_get);
 
 // POST request to update BookInstance
-router.post('/genre/:id/update', genre_controller.genre_update_post);
+router.post('/bookinstance/:id/update', bookinstance_controller.bookinstance_update_post);
 
 // GET request for one BookInstance
-router.get('/genre/:id', genre_controller.genre_detail);
+router.get('/bookinstance/:id', bookinstance_controller.bookinstance_detail);
 
 // GET request for list all BookInstance items
-router.get('/genres', genre_controller.genre_list);
+router.get('/bookinstances', bookinstance_controller.bookinstance_list);
 
 module.exports = router;
