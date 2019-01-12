@@ -26,4 +26,4 @@ AuthorSchema.virtual('url').get(function () {
 });
 
 // export model
-module.export = mongoose.model('Author', AuthorSchema);
+module.exports = mongoose.model('Author', AuthorSchema);

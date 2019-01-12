@@ -12,4 +12,4 @@ GenreSchema.virtual('url').get(function () {
 });
 
 // export model
-module.export = mongoose.model('Genre', GenreSchema);
+module.exports = mongoose.model('Genre', GenreSchema);
