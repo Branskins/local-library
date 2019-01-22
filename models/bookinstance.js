@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
@@ -12,6 +13,11 @@ var BookInstanceSchema = new Schema({
 // virtual for book instance's url
 BookInstanceSchema.virtual('url').get(function () {
   return '/catalog/bookinstance/' + this._id;
+});
+
+// virtual for book instance formatted date
+BookInstanceSchema.virtual('due_back_formatted').get(function () {
+  return moment(this.due_back).format('dddd, MMMM Do, YYYY');
 });
 
 // export model
