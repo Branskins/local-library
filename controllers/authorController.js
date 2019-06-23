@@ -136,10 +136,62 @@ exports.author_delete_post = function(req, res, next) {
 
 // Display Author update form on GET.
 exports.author_update_get = function(req, res) {
-  res.send('NOT IMPLEMENTED: Author update GET');
+
+  Author.findById(req.params.id, function(err, author) {
+    if(err) { return next(err); }
+    if(author == null) { // No results
+      var err = new Error("Author not found");
+      err.status = 404;
+      return next(err);
+    }
+    // Success
+    // Show the author's data
+    res.render('author_form', { title: 'Author Update', author: author });
+  });
 };
 
 // Handle Author update on POST.
-exports.author_update_post = function(req, res) {
-  res.send('NOT IMPLEMENTED: Author update POST');
-};
+exports.author_update_post = function(req, res) = [
+
+  // Validate fields.
+  body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
+    .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
+  body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
+    .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
+  body('date_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
+  body('date_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
+
+  // Sanitize fields.
+  sanitizeBody('first_name').trim().escape(),
+  sanitizeBody('family_name').trim().escape(),
+  sanitizeBody('date_birth').toDate(),
+  sanitizeBody('date_death').toDate(),
+
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+
+    // Extract the validation errors from request.
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/errors messages.
+      res.render('author_form', { title: 'Update Author', author: req.body, errors: errors.array() });
+      return;
+    }
+    else {
+      // Data from from is valid.
+      // Update the record.
+      var author = new Author({
+        first_name: req.body.first_name,
+        family_name: req.body.family_name,
+        date_birth: req.body.date_birth,
+        date_death: req.body.date_death
+      });
+      Author.findOneAndUpdate({ _id: req.params.id }, author, {}, function(err, theauthor) {
+        if(err) { return next(err); }
+        // Succesful - redirect to book detail page.
+        res.redirect(theauthor.url);
+      });
+    }
+  }
+]
