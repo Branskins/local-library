@@ -151,7 +151,7 @@ exports.author_update_get = function(req, res) {
 };
 
 // Handle Author update on POST.
-exports.author_update_post = function(req, res) = [
+exports.author_update_post = [
 
   // Validate fields.
   body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
@@ -185,8 +185,10 @@ exports.author_update_post = function(req, res) = [
         first_name: req.body.first_name,
         family_name: req.body.family_name,
         date_birth: req.body.date_birth,
-        date_death: req.body.date_death
+        date_death: req.body.date_death,
+        _id: req.params.id
       });
+
       Author.findOneAndUpdate({ _id: req.params.id }, author, {}, function(err, theauthor) {
         if(err) { return next(err); }
         // Succesful - redirect to book detail page.
