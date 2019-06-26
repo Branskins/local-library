@@ -10,7 +10,10 @@ block content
         for book in book_list
           if bookinstance
             //- User entered data(POST)
-            option(value=book._id selected=(bookinstance.book.toString()==book._id.toString() ? 'selected' : false)) #{book.title}
+            option(value=book._id selected=(
+            bookinstance.book.toString()==book._id.toString() ||
+            bookinstance.book._id==book._id.toString()
+            ? 'selected' : false)) #{book.title}
           else
             //- Default data(GET)
             option(value=book._id) #{book.title}
