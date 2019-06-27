@@ -141,7 +141,6 @@ exports.bookinstance_update_get = function(req, res, next) {
       return next(err);
     }
     // Success, show bookinstance´s data
-    console.log(results.book_list);
     res.render('bookinstance_form', { title: 'Update Book Copy', bookinstance: results.bookinstance, book_list: results.book_list})
   });
 };
