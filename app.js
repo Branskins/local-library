@@ -19,7 +19,8 @@ const options = {
 
 // set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://branskins:qURT821NmRiG5ILg@cluster0-shard-00-00-vftmf.mongodb.net:27017,cluster0-shard-00-01-vftmf.mongodb.net:27017,cluster0-shard-00-02-vftmf.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+var dev_db_url = 'mongodb://branskins:qURT821NmRiG5ILg@cluster0-shard-00-00-vftmf.mongodb.net:27017,cluster0-shard-00-01-vftmf.mongodb.net:27017,cluster0-shard-00-02-vftmf.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, options);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
