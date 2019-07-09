@@ -230,7 +230,7 @@ exports.book_update_get = function(req, res, next) {
     for(var all_genres = 0; all_genres < results.genres.length; all_genres++) {
       for(book_genres = 0; book_genres < results.book.genre.length; book_genres++) {
         if(results.genres[all_genres]._id.toString() == results.book.genre[book_genres]._id.toString()) {
-          results.genres[all_genres].check = 'true';
+          results.genres[all_genres].checked = 'true';
         }
       }
     }
