@@ -32,8 +32,8 @@ var bookinstances = []
 
 function authorCreate(first_name, family_name, d_birth, d_death, cb) {
   authordetail = {first_name:first_name , family_name: family_name }
-  if (d_birth != false) authordetail.date_of_birth = d_birth
-  if (d_death != false) authordetail.date_of_death = d_death
+  if (d_birth != false) authordetail.date_birth = d_birth
+  if (d_death != false) authordetail.date_death = d_death
 
   var author = new Author(authordetail);
 
